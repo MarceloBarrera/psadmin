@@ -1,11 +1,11 @@
 "use strict";
 
 var React = require('react');
-
 var AuthorForm = require('./authorForm');
+var AuthorApi = require('../../api/authorApi');
 
 // var Router = require('react-router');
-// var AuthorApi = require('../../api/authorApi');
+
 // var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({	
@@ -22,11 +22,20 @@ var ManageAuthorPage = React.createClass({
 		return this.setState({author: this.state.author});
 	},
 
+	saveAuthor: function(event) {
+		event.preventDefault();
+		AuthorApi.saveAuthor(this.state.author);
+		// this.setState({dirty: false});
+		// toastr.success('Author saved.');
+		// this.transitionTo('authors');
+	},
+
 	render: function() {
 		return (
 			<div>			
 				<AuthorForm author={this.state.author}
-				onChange={this.setAuthorState} />
+				onChange={this.setAuthorState} 
+				onSave={this.saveAuthor}/>
 			</div>
 		);
 	}
