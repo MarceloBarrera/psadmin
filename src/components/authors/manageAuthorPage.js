@@ -4,11 +4,15 @@ var React = require('react');
 var AuthorForm = require('./authorForm');
 var AuthorApi = require('../../api/authorApi');
 
-// var Router = require('react-router');
+var Router = require('react-router');
 
 // var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({	
+	mixins: [
+		Router.Navigation
+	],
+
 	getInitialState: function() {
 		return {
 			author: { id: '', firstName: '', lastName: '' }			
@@ -27,7 +31,7 @@ var ManageAuthorPage = React.createClass({
 		AuthorApi.saveAuthor(this.state.author);
 		// this.setState({dirty: false});
 		// toastr.success('Author saved.');
-		// this.transitionTo('authors');
+		this.transitionTo('authors');
 	},
 
 	render: function() {
